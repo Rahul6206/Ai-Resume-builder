@@ -25,6 +25,7 @@ Built for students, developers, and job seekers.
 **Email:** Brevo API
 
 ##📂 Project Structure
+```
 CVPilot/
 ├── client/
 ├── server/
@@ -32,7 +33,7 @@ CVPilot/
 │       ├── routes controllers models middleware
 │       └── templates utils validations
 └── README.md
-
+```
 ## ⚙️ Environment Variables
 ```
 MONGO_URI=
