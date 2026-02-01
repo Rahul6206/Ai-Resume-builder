@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Modern Creative Resume Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+        crossorigin="anonymous"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #008080;
+            --accent-color: #6a0dad;
+            --text-color: #333333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #f0f8ff;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f4f4;
+            font-family: 'Inter', sans-serif;
+            font-size: 10pt;
+            /* -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important; */
+        }
+
+        .page {
+            display: flex;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .left {
+            width: 30%;
+            background: var(--dark-bg);
+            padding: 25px 20px;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        .name-container {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-size: 20pt;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .job-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 2px;
+        }
+
+        .contact-info div {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+            width: 18px;
+            margin-right: 8px;
+        }
+
+        .section-title {
+            font-size: 12pt;
+            text-transform: uppercase;
+            margin: 20px 0 10px;
+            font-weight: 700;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 4px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 9pt;
+            white-space: nowrap;
+        }
+
+        .right {
+            width: 70%;
+            padding: 25px 30px;
+        }
+
+        h2.right-header {
+            font-size: 14pt;
+            margin: 20px 0 8px;
+            padding-bottom: 4px;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .item {
+            margin-bottom: 18px;
+        }
+
+        .item-title {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .item-subtitle {
+            font-size: 10pt;
+            font-weight: 500;
+        }
+
+        .item-duration {
+            font-size: 9pt;
+            color: #6b7280;
+        }
+
+        .item-description {
+            font-size: 9.5pt;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- LEFT PANEL -->
+        <div class="left">
+            <div class="name-container">
+                <div class="name">{{fullname}}</div>
+                <div class="job-title">{{jobTitle}}</div>
+            </div>
+
+            <!-- Contact -->
+            <div class="section-title">Contact</div>
+            <div class="contact-info">
+                {{#if email}} <div><i class="fas fa-envelope"></i> {{email}}</div> {{/if}}
+                {{#if phone}} <div><i class="fas fa-phone"></i> {{phone}}</div> {{/if}}
+                {{#if linkedin}} <div><i class="fab fa-linkedin"></i> {{linkedin}}</div> {{/if}}
+                {{#if github}} <div><i class="fab fa-github"></i> {{github}}</div> {{/if}}
+                {{#if portfolio}} <div><i class="fas fa-globe"></i> {{portfolio}}</div> {{/if}}
+            </div>
+
+            <!-- Technical Skills -->
+            <div class="section-title">Skills</div>
+            <div class="tag-container">
+                {{#each technicalSkills}}
+                <div class="tag">{{this}}</div>
+                {{/each}}
+            </div>
+
+            <!-- Languages -->
+            <div class="section-title">Languages</div>
+            <div class="tag-container">
+                {{#each languages}}
+                <div class="tag">{{this}}</div>
+                {{/each}}
+            </div>
+
+            <!-- Interests -->
+            <div class="section-title">Interests</div>
+            <div class="tag-container">
+                {{#each interests}}
+                <div class="tag">{{this}}</div>
+                {{/each}}
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="right">
+
+            <!-- Profile Summary -->
+            <h2 class="right-header">Profile Summary</h2>
+            <p>{{profileSummary}}</p>
+
+            <!-- Work Experience -->
+            <h2 class="right-header">Work Experience</h2>
+            {{#each workExperience}}
+            <div class="item">
+                <div class="item-title">{{position}} — {{company}}</div>
+                <div class="item-duration">{{formatRange startDate endDate}}</div>
+                <div class="item-description">{{description}}</div>
+            </div>
+            {{/each}}
+
+            <!-- Projects -->
+            <h2 class="right-header">Projects</h2>
+            {{#each projects}}
+            <div class="item">
+                <div class="item-title">{{title}}</div>
+                <div class="item-subtitle">
+                    {{#each technologies}}
+                    {{this}}{{#unless @last}}, {{/unless}}
+                    {{/each}}
+                </div>
+                <div class="item-description">{{description}}</div>
+                {{#if link}}<div class="item-duration">Live: {{link}}</div>{{/if}}
+                {{#if githubLink}}<div class="item-duration">GitHub: {{githubLink}}</div>{{/if}}
+            </div>
+            {{/each}}
+
+            <!-- Education -->
+            <h2 class="right-header">Education</h2>
+            {{#each education}}
+            <div class="item">
+                <div class="item-title">{{degree}}</div>
+                <div class="item-duration">{{institution}} — {{startYear}} to {{endYear}}</div>
+                {{#if percentage}}
+                <div class="item-description">Percentage: {{percentage}}%</div>
+                {{/if}}
+            </div>
+            {{/each}}
+
+            <!-- Certifications -->
+            <h2 class="right-header">Certifications</h2>
+            {{#each certifications}}
+            <div class="item">
+                <div class="item-title">{{title}}</div>
+                <div class="item-subtitle">{{organization}}</div>
+                <div class="item-duration">
+                    {{#if issueDate}} {{formatDate issueDate}} {{/if}}
+                </div>
+                {{#if credentialUrl}}
+                <div class="item-description">{{credentialUrl}}</div>
+                {{/if}}
+            </div>
+            {{/each}}
+
+        </div>
+
+    </div>
+</body>
+
+</html>

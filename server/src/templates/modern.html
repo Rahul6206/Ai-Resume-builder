@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Modern Professional Resume Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --accent-color: #333333;
+            --light-text: #6c757d;
+            --border-color: #dee2e6;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f4f4;
+            font-family: 'Inter', sans-serif;
+            font-size: 10.5pt;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            padding: 30px 40px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-size: 24pt;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .contact-info span {
+            margin: 0 10px;
+            color: var(--light-text);
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 4px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 13pt;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            padding-right: 15px;
+        }
+
+        .section-divider {
+            flex-grow: 1;
+            height: 2px;
+            background: var(--border-color);
+        }
+
+        .item {
+            margin-bottom: 12px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+        }
+
+        .item-left {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .item-right {
+            color: var(--light-text);
+            font-style: italic;
+        }
+
+        .item-subtitle {
+            display: block;
+            font-size: 10pt;
+            color: var(--light-text);
+        }
+
+        .item-list {
+            margin-top: 5px;
+            margin-left: 15px;
+            list-style: disc;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 15px;
+            font-size: 10pt;
+        }
+
+        .skill-item i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="name">{{fullname}}</div>
+            <div class="job-title">{{jobTitle}}</div>
+
+            <div class="contact-info">
+                {{#if email}}<span><i class="fas fa-envelope"></i> {{email}}</span>{{/if}}
+                {{#if phone}}<span><i class="fas fa-phone"></i> {{phone}}</span>{{/if}}
+                {{#if linkedin}}<span><i class="fab fa-linkedin"></i> {{linkedin}}</span>{{/if}}
+                {{#if github}}<span><i class="fab fa-github"></i> {{github}}</span>{{/if}}
+            </div>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Summary</div>
+                <div class="section-divider"></div>
+            </div>
+            <p>{{profileSummary}}</p>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Skills</div>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="skills-grid">
+                {{#each technicalSkills}}
+                <span class="skill-item"><i class="fas fa-check"></i> {{this}}</span>
+                {{/each}}
+            </div>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Experience</div>
+                <div class="section-divider"></div>
+            </div>
+
+            {{#each workExperience}}
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-left">{{position}}</span>
+                    <span class="item-right">{{formatRange startDate endDate}}</span>
+                </div>
+
+                <span class="item-subtitle">{{company}}</span>
+
+                {{#if responsibilities}}
+                <ul class="item-list">
+                    {{#each responsibilities}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Projects</div>
+                <div class="section-divider"></div>
+            </div>
+
+            {{#each projects}}
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-left">{{title}}</span>
+                </div>
+
+                {{#if technologies}}
+                <span class="item-subtitle">
+                    {{#each technologies}}
+                    {{this}}{{#unless @last}}, {{/unless}}
+                    {{/each}}
+                </span>
+                {{/if}}
+
+                <p style="margin: 5px 0;">{{description}}</p>
+
+                {{#if link}}<div class="item-right">Live: {{link}}</div>{{/if}}
+                {{#if githubLink}}<div class="item-right">GitHub: {{githubLink}}</div>{{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Education</div>
+                <div class="section-divider"></div>
+            </div>
+
+            {{#each education}}
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-left">{{degree}}</span>
+                    <span class="item-right">{{startYear}} - {{endYear}}</span>
+                </div>
+                <span class="item-subtitle">{{institution}}</span>
+                {{#if percentage}}
+                <p style="margin: 5px 0;">Percentage: {{percentage}}%</p>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Certifications</div>
+                <div class="section-divider"></div>
+            </div>
+
+            {{#each certifications}}
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-left">{{title}}</span>
+                    <span class="item-right">{{formatDate issueDate}}</span>
+                </div>
+                <span class="item-subtitle">{{organization}}</span>
+                {{#if credentialUrl}}
+                <p style="margin: 5px 0;">{{credentialUrl}}</p>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- LANGUAGES + INTERESTS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Additional</div>
+                <div class="section-divider"></div>
+            </div>
+
+            <div style="display: flex; gap: 40px;">
+                <div>
+                    <h4>LANGUAGES</h4>
+                    <ul class="item-list" style="list-style: none; margin-left: 0;">
+                        {{#each languages}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>INTERESTS</h4>
+                    <ul class="item-list" style="list-style: none; margin-left: 0;">
+                        {{#each interests}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

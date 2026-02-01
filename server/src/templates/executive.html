@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Executive Resume</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: "Source Serif Pro", serif;
+            color: #0f172a;
+            line-height: 1.45;
+            font-size: 13.6px;
+        }
+
+        .page {
+            width: 800px;
+            margin: 20px auto;
+            padding: 28px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: #475569;
+        }
+
+        /* Section Title */
+        h2 {
+            font-size: 14.5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 3px;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            color: #1e293b;
+        }
+
+        .item {
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .item-sub {
+            color: #64748b;
+            font-size: 12.8px;
+        }
+
+        .item-desc {
+            font-size: 13px;
+            color: #334155;
+            margin-top: 2px;
+        }
+
+        ul {
+            margin-left: 18px;
+            margin-top: 4px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div>
+                <div class="name">{{fullname}}</div>
+                <div class="meta">{{email}} | {{phone}}</div>
+            </div>
+            <div>
+                {{#if linkedin}}<div class="meta">{{linkedin}}</div>{{/if}}
+                {{#if github}}<div class="meta">{{github}}</div>{{/if}}
+                {{#if portfolio}}<div class="meta">{{portfolio}}</div>{{/if}}
+            </div>
+        </div>
+
+        <!-- SUMMARY -->
+        <h2>Profile Summary</h2>
+        <p>{{profileSummary}}</p>
+
+        <!-- EDUCATION -->
+        <h2>Education</h2>
+        {{#each education}}
+        <div class="item">
+            <div class="item-title">{{degree}}</div>
+            <div class="item-sub">
+                {{institution}} ({{startYear}} – {{endYear}})
+                {{#if percentage}} • {{percentage}}%{{/if}}
+            </div>
+        </div>
+        {{/each}}
+
+    <!-- TECHNICAL SKILLS -->
+    <h2>Technical Skills</h2>
+    <p>
+        {{#each technicalSkills}}
+        {{this}}{{#unless @last}}, {{/unless}}
+        {{/each}}
+    </p>
+
+        <!-- EXPERIENCE -->
+        <h2>Work Experience</h2>
+        {{#each workExperience}}
+        <div class="item">
+            <div class="item-title">{{position}} — {{company}}</div>
+            <div class="item-sub">{{formatRange startDate endDate}}</div>
+            <div class="item-desc">{{description}}</div>
+        </div>
+        {{/each}}
+
+        <!-- PROJECTS -->
+        <h2>Projects</h2>
+        {{#each projects}}
+        <div class="item">
+            <div class="item-title">{{title}}</div>
+            <div class="item-sub">
+                {{#each technologies}}
+                {{this}}{{#unless @last}}, {{/unless}}
+                {{/each}}
+            </div>
+            <div class="item-desc">{{description}}</div>
+            {{#if link}}<div class="item-sub">Live: {{link}}</div>{{/if}}
+            {{#if githubLink}}<div class="item-sub">GitHub: {{githubLink}}</div>{{/if}}
+        </div>
+        {{/each}}
+
+        <!-- CERTIFICATIONS -->
+        <h2>Certifications</h2>
+        <ul>
+            {{#each certifications}}
+            <li>
+                {{title}} — {{organization}}
+                {{#if issueDate}} ({{formatDate issueDate}}){{/if}}
+                {{#if credentialUrl}} — {{credentialUrl}}{{/if}}
+            </li>
+            {{/each}}
+        </ul>
+
+        <!-- LANGUAGES -->
+        <h2>Languages</h2>
+        <p>
+            {{#each languages}}
+            {{this}}{{#unless @last}}, {{/unless}}
+            {{/each}}
+        </p>
+
+        <!-- INTERESTS -->
+        <h2>Interests</h2>
+        <p>
+            {{#each interests}}
+            {{this}}{{#unless @last}}, {{/unless}}
+            {{/each}}
+        </p>
+    </div>
+</body>
+
+</html>
