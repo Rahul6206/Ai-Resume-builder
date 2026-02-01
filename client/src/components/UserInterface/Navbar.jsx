@@ -9,7 +9,7 @@ const Navbar = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const navigate = useNavigate();
 
-    const GITHUB_REPO_URL = "https://github.com/isauravanand/";
+    const GITHUB_REPO_URL = "https://github.com/Rahul6206/Ai-Resume-builder";
 
     const checkAuth = () => {
         const user = localStorage.getItem("user");
