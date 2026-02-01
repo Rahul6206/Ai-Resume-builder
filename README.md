@@ -16,15 +16,15 @@ Built for students, developers, and job seekers.
 
 🛡️ Secure backend & input validation
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-Frontend: React, TailwindCSS, Axios
-Backend: Node.js, Express, JWT
-PDF: Puppeteer + Handlebars
-Database: MongoDB
-Email: Brevo API
+**Frontend:** React, TailwindCSS, Axios
+**Backend:** Node.js, Express, JWT
+**PDF:** Puppeteer + Handlebars
+**Database:** MongoDB
+**Email:** Brevo API
 
-📂 Project Structure
+##📂 Project Structure
 CVPilot/
 ├── client/
 ├── server/
@@ -33,22 +33,25 @@ CVPilot/
 │       └── templates utils validations
 └── README.md
 
-⚙️ Environment Variables
+## ⚙️ Environment Variables
+```
 MONGO_URI=
 JWT_SECRET=
 BREVO_API_KEY=
 GOOGLE_GEMINI_API_KEY=
 CLIENT_URL=
-PORT=3000
-
-🚀 Setup
+PORT=3000 
+```
+## 🚀 Setup
+```
 git clone https://github.com/your-username/cvpilot.git
 cd cvpilot
 
-cd server && npm install && npm run dev
+cd server && npm install && npm run start
 cd client && npm install && npm run dev
+```
 
-🧠 Workflow
+## 🧠 Workflow
 
 User enters resume details
 
