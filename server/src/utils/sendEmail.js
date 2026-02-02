@@ -12,7 +12,7 @@ async function sendVerificationEmail(to, verifyCode) {
   try {
     const emailData = {
       sender: {
-        name: "Nexfolio",
+        name: "CVPilot",
         email: "rahulrp8677@gmail.com", // can be Gmail (Brevo allows it)
       },
       to: [{ email: to }],
@@ -48,7 +48,7 @@ async function sendVerificationEmail(to, verifyCode) {
       </p>
 
       <p style="font-size: 13px; color: #6b7280; margin-top: 25px;">
-        — <strong>Nexfolio</strong>
+        — <strong>CVPilot</strong>
       </p>
     </div>
   </div>
