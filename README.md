@@ -4,6 +4,12 @@ CVPilot is a full-stack MERN application that helps users create AI-powered resu
 
 Built for students, developers, and job seekers.
 
+
+## 🚀 Live Demo
+
+[CVPilot](https://ai-resume-builder-orpin-kappa.vercel.app/)
+ 
+
  ## ✨ Features
 
  🔐 JWT-based authentication
