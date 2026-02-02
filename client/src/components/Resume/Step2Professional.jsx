@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { Plus, X, GraduationCap, AlignLeft, Calendar } from 'lucide-react';
+import { Plus, X, GraduationCap, AlignLeft, Calendar } from '../../icons';
 
 const Step2Professional = React.forwardRef(({ formData, handleArrayInputChange, removeArrayItem, addArrayItem, validationRules, setFormData }, ref) => {
 

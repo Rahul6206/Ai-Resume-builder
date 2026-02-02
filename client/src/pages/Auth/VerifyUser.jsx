@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Lock } from "lucide-react";
+import { Lock } from "../../icons";
 import { verifyOtp } from "../../api/authApi";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation, Link } from "react-router-dom";

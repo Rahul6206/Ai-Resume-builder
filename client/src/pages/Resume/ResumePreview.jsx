@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { getResumeById } from "../../api/resumeApi";
 import { generateAiResumes } from "../../api/aiApi";
 import Navbar from "../../components/UserInterface/Navbar";
-import { Download, FileText, Check, LayoutTemplate, Loader2, Sparkles, ChevronRight, User, Mail, Phone, Hash, Code2 } from "lucide-react";
+import { Download, FileText, Check, LayoutTemplate, Loader2, Sparkles, ChevronRight, User, Mail, Phone, Hash, Code2 } from "../../icons";
 import Footer from "../../components/UserInterface/Footer";
 
 const ResumePreview = () => {
