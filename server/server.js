@@ -26,6 +26,9 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api", resumeRoutes);
 app.use("/api/ai", aiRoutes);
+app.get("/", (req, res) => {
+  res.json({ status: "API is running 🚀" });
+});
 
 
 app.listen(process.env.PORT || 10000, () => {
