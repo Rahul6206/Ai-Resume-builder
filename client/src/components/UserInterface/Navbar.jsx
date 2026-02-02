@@ -120,13 +120,12 @@ const Navbar = () => {
                                 flex items-center gap-2 
                                 bg-zinc-800 text-white 
                                 font-semibold
-                                px-6 py-2.5 rounded-xl transition-all duration-300 shadow-lg text-sm
+                                px-3 py-2.5 rounded-xl transition-all duration-300 shadow-lg text-sm
                                 hover:scale-[1.03] hover:bg-zinc-700 hover:shadow-purple-500/10
                                 border border-white/10 group
                             "
                         >
                             <Github size={18} className="group-hover:text-purple-400 transition-colors" />
-                            <span className="relative z-10">Contribute</span>
                         </a>
 
                     </div>
