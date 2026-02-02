@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Lock, User, Loader2, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, Lock, User, Loader2, ArrowRight, Sparkles } from "../../icons";
 import { registerUser, sendOtp } from "../../api/authApi";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";

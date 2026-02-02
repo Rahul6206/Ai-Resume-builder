@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../../components/UserInterface/Navbar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Zap, Award, Clock, FileText, CheckCircle, Edit, Download, ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { Zap, Award, Clock, FileText, CheckCircle, Edit, Download, ArrowRight, ChevronDown, Sparkles } from "../../icons";
 import Footer from "../../components/UserInterface/Footer";
 
 const Home = () => {
