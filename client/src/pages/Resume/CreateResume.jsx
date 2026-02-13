@@ -324,7 +324,7 @@ const CreateResume = () => {
       } else {
         toast.error("Network or server connection failed.");
       }
-      console.error("Submission Error:", error);
+      toast.error("Submission Error. Please check your input and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -341,7 +341,6 @@ const CreateResume = () => {
 
 
 
-console.log("Current Step:", currentStep);
   const buttonClasses = useMemo(() => ({
     primary: "flex items-center gap-2 px-8 py-3 rounded-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100",
     secondary: "flex items-center gap-2 px-6 py-3 rounded-xl font-semibold bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white border border-white/5 hover:border-white/10 transition-all duration-300",

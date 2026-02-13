@@ -57,8 +57,6 @@ const ResumePreview = () => {
 
             toast.success("AI Resume PDF Generated!");
         } catch (err) {
-            console.error("AI Resume PDF Error:", err);
-            console.log("Server error:", err.response?.data);
             toast.error("Failed to generate AI resume PDF");
         } finally {
             setLoadingType(null);

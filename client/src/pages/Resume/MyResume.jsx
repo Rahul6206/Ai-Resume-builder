@@ -36,7 +36,7 @@ const MyResumes = () => {
                 toast.error("Failed to fetch resumes list.");
             }
         } catch (err) {
-            console.error("Fetch Resumes Error:", err);
+            toast.error("Fetch Resumes failed.");
             if (err.response && (err.response.status === 401 || err.response.status === 403)) {
                 setError("Authentication failed. Please log in.");
                 toast.error("Session expired or unauthorized access.");
@@ -87,7 +87,7 @@ const MyResumes = () => {
             setResumes(prev => prev.filter(r => r._id !== deleteId));
             toast.success("Resume deleted successfully.");
         } catch (err) {
-            console.error("Delete Error:", err);
+            
             toast.error("Failed to delete resume. Please try again.");
         } finally {
             setIsDeleting(false);

@@ -31,11 +31,7 @@ import { Plus, X, Briefcase, FolderGit2, Award, Terminal } from 'lucide-react';
     );
 
 const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, removeArrayItem, addArrayItem, validationRules, setFormData }, ref) => {
-
-
-    console.log("Rendered Step3");
-
-
+ 
 
     const validate = () => {
 
@@ -224,8 +220,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                     buttonText="Add Experience"
                 />
                 <div className="space-y-6">
-                    {formData.workExperience.map((work, idx) => {
-                        console.log("Work ID:", work.id);
+                    {formData.workExperience.map((work, idx) => { 
 
                         return (
                             <div

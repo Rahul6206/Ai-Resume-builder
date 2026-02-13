@@ -37,7 +37,7 @@ const GenerateAiResume = () => {
         setTimeout(() => navigate("/"), 2000);
 
       } catch (error) {
-        console.error("AI resume generation error:", error);
+        
         toast.error("Failed to generate resume");
         navigate("/create-resume");
       } finally {
