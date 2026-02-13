@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { Plus, X, Briefcase, FolderGit2, Award, Terminal } from '../../icons';
+import { Plus, X, Briefcase, FolderGit2, Award, Terminal } from 'lucide-react';
 
 const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, removeArrayItem, addArrayItem, validationRules, setFormData }, ref) => {
 

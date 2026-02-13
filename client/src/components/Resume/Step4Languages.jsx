@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { Plus, X, Globe, Heart } from '../../icons';
+import { Plus, X, Globe, Heart } from 'lucide-react';
 
 const SimpleInputList = ({
     title,

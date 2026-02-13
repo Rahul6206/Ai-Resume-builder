@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { User, Mail, Phone, Linkedin, Github, Globe } from '../../icons';
+import { User, Mail, Phone, Linkedin, Github, Globe } from 'lucide-react';
 
 const InputField = ({ label, icon: Icon, value, onChange, type = "text", placeholder, required }) => (
     <div className="group">

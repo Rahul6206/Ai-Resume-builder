@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FileText, Rocket, RefreshCw, Loader2, Calendar, Edit, Plus, Search, Pencil, Trash2, AlertTriangle, X } from "../../icons";
+import { FileText, Rocket, RefreshCw, Loader2, Calendar, Edit, Plus, Search, Pencil, Trash2, AlertTriangle, X } from "lucide-react";
 import { getMyResumes, deleteResume } from "../../api/resumeApi"; // Import deleteResume
 import Navbar from "../../components/UserInterface/Navbar";
 import Footer from "../../components/UserInterface/Footer";

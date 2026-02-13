@@ -11,7 +11,7 @@ import Step1Contact from "../../components/Resume/Step1Contact";
 import Step2Professional from "../../components/Resume/Step2Professional";
 import Step3Experience from "../../components/Resume/Step3Experience";
 import Step4Languages from "../../components/Resume/Step4Languages";
-import { ChevronLeft, ChevronRight, Save, Pencil, Sparkles } from "../../icons";
+import { ChevronLeft, ChevronRight, Save, Pencil, Sparkles } from "lucide-react";
 
 const CreateResume = () => {
   const navigate = useNavigate();
