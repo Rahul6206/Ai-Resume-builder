@@ -29,6 +29,8 @@ const InputField = ({ label, icon: Icon, value, onChange, type = "text", placeho
 );
 
 const Step1Contact = React.forwardRef(({ formData, validationRules, setFormData }, ref) => {
+    console.log("Step1Contact rendered");
+
 
     const handleBasicInputChange = (field, value) => {
         setFormData((prev) => ({
