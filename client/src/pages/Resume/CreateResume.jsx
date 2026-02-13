@@ -32,8 +32,20 @@ const CreateResume = () => {
     portfolio: "",
     profileSummary: "",
     education: [{ degree: "", institution: "", startYear: "", endYear: "", percentage: "" }],
-    technicalSkills: ["", ""],
-    workExperience: [{ company: "", position: "", startDate: "", endDate: "", description: "" }],
+    technicalSkills:  [
+  { id: crypto.randomUUID(), name: "" }
+],
+    workExperience: [
+  {
+    id: crypto.randomUUID(),
+    company: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    description: ""
+  }
+],
+
     projects: [{ title: "", description: "", technologies: [], link: "", githubLink: "" }],
     certifications: [{ title: "", organization: "", issueDate: "", credentialUrl: "" }],
     languages: ["English", ""],
@@ -41,25 +53,24 @@ const CreateResume = () => {
   });
 
   useEffect(() => {
-    if (location.state && location.state.resumeData) {
-      const data = location.state.resumeData;
-      setIsEditMode(true);
-      setResumeId(data._id);
+   if (location.state && location.state.resumeData) {
+  const data = location.state.resumeData;
 
-      setFormData(prev => ({
-        ...prev,
-        ...data,
-        education: data.education?.length ? data.education : prev.education,
-        technicalSkills: data.technicalSkills?.length ? data.technicalSkills : prev.technicalSkills,
-        workExperience: data.workExperience?.length ? data.workExperience : prev.workExperience,
-        projects: data.projects?.length ? data.projects : prev.projects,
-        certifications: data.certifications?.length ? data.certifications : prev.certifications,
-        languages: data.languages?.length ? data.languages : prev.languages,
-        interests: data.interests?.length ? data.interests : prev.interests,
-      }));
+  const withIds = (arr) =>
+    arr.map((item) => ({
+      id: item.id || item._id || crypto.randomUUID(),
+      ...item,
+    }));
 
-     
-    }
+  setFormData((prev) => ({
+    ...prev,
+    ...data,
+    workExperience: withIds(data.workExperience || prev.workExperience),
+    projects: withIds(data.projects || prev.projects),
+    certifications: withIds(data.certifications || prev.certifications),
+  }));
+}
+
   }, [location.state]);
 
   const validationRules = {
@@ -109,17 +120,41 @@ const CreateResume = () => {
   };
 
   const addArrayItem = (arrayName) => {
-    setFormData((prev) => {
-      const newItem =
-        arrayName === "education" ? { degree: "", institution: "", startYear: "", endYear: "", percentage: "" }
-          : arrayName === "workExperience" ? { company: "", position: "", startDate: "", endDate: "", description: "" }
-            : arrayName === "projects" ? { title: "", description: "", technologies: [], link: "", githubLink: "" }
-              : arrayName === "certifications" ? { title: "", organization: "", issueDate: "", credentialUrl: "" }
-                : "";
+  setFormData((prev) => {
+    const newItem =
+    arrayName === "education" ? { degree: "", institution: "", startYear: "", endYear: "", percentage: "" }
+      : arrayName === "workExperience"
+        ? {
+            id: crypto.randomUUID(),
+            company: "",
+            position: "",
+            startDate: "",
+            endDate: "",
+            description: "",
+          }
+        : arrayName === "projects"
+        ? {
+            id: crypto.randomUUID(),
+            title: "",
+            description: "",
+            technologies: [],
+            link: "",
+            githubLink: "",
+          }
+        : arrayName === "certifications"
+        ? {
+            id: crypto.randomUUID(),
+            title: "",
+            organization: "",
+            issueDate: "",
+            credentialUrl: "",
+          }
+        : "";
 
-      return { ...prev, [arrayName]: [...prev[arrayName], newItem] };
-    });
-  };
+    return { ...prev, [arrayName]: [...prev[arrayName], newItem] };
+  });
+};
+
 
   const removeArrayItem = (arrayName, index) => {
     setFormData((prev) => ({

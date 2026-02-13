@@ -18,7 +18,13 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
         }
 
         for (let work of formData.workExperience) {
-            const hasAnyField = work.company?.trim() || work.position?.trim() || work.startDate;
+            if (hasAnyField) {
+                if (!work.company || !work.position || !work.startDate) {
+                    toast.error("All work experience fields are required");
+                    return false;
+                }
+            }
+
             if (hasAnyField) {
                 if (!validationRules.company.validate(work.company)) {
                     toast.error(`Work Exp: ${validationRules.company.error}`);
@@ -146,7 +152,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                 />
                 <div className="grid md:grid-cols-3 gap-4">
                     {formData.technicalSkills.map((skill, idx) => (
-                        <div key={idx} className="relative group">
+                        <div key={skill.id} className="relative group">
                             <div className="absolute left-3 top-3 text-zinc-600 pointer-events-none">
                                 <Terminal size={16} />
                             </div>
@@ -157,7 +163,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                                 className="w-full pl-10 pr-10 py-3 bg-zinc-900/30 border border-white/5 rounded-xl text-white focus:outline-none focus:border-purple-500/50 focus:bg-zinc-900/50 transition-all"
                                 placeholder="e.g. React.js"
                             />
-                            {formData.technicalSkills.length > 0 && (
+                            {formData.technicalSkills.length > 1 && (
                                 <button
                                     onClick={() => removeArrayItem("technicalSkills", idx)}
                                     className="absolute right-2 top-2 text-zinc-600 hover:text-red-400 p-1 hover:bg-white/5 rounded"
@@ -180,7 +186,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                 />
                 <div className="space-y-6">
                     {formData.workExperience.map((work, idx) => (
-                        <div key={idx} className="relative p-6 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-white/10 transition-all">
+                        <div key={work.id} className="relative p-6 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-white/10 transition-all">
                             <RemoveButton onClick={() => removeArrayItem("workExperience", idx)} />
 
                             <div className="flex items-center gap-3 mb-6">
@@ -214,7 +220,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                 />
                 <div className="space-y-6">
                     {formData.projects.map((proj, idx) => (
-                        <div key={idx} className="relative p-6 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-white/10 transition-all">
+                        <div key={proj.id} className="relative p-6 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-white/10 transition-all">
                             <RemoveButton onClick={() => removeArrayItem("projects", idx)} />
 
                             <div className="flex items-center gap-3 mb-6">
@@ -246,7 +252,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                 />
                 <div className="space-y-6">
                     {formData.certifications.map((cert, idx) => (
-                        <div key={idx} className="relative p-6 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-white/10 transition-all">
+                        <div key={cert.id} className="relative p-6 bg-zinc-900/30 border border-white/5 rounded-2xl hover:border-white/10 transition-all">
                             <RemoveButton onClick={() => removeArrayItem("certifications", idx)} />
 
                             <div className="flex items-center gap-3 mb-6">
