@@ -30,7 +30,7 @@ const StepIndicator = ({ currentStep }) => {
                                 `}
                             >
                                 {isActive ? (
-                                    <span className="bg-gradient-to-br from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                                    <span className="bg-linear-to-br from-purple-400 to-indigo-400 bg-clip-text text-transparent">
                                         {step.num}
                                     </span>
                                 ) : (
@@ -52,7 +52,7 @@ const StepIndicator = ({ currentStep }) => {
                                 <div
                                     className={`
                                         absolute top-5 left-1/2 w-[calc(100%*2)] h-[2px] -z-20 origin-left transition-all duration-700
-                                        ${step.num < currentStep ? "bg-gradient-to-r from-purple-600 to-indigo-600 scale-x-100" : "bg-transparent scale-x-0"}
+                                        ${step.num < currentStep ? "bg-linear-to-r from-purple-600 to-indigo-600 scale-x-100" : "bg-transparent scale-x-0"}
                                     `}
                                 />
                             )}

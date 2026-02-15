@@ -66,7 +66,7 @@ const VerifyUser = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center px-5 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-black"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-purple-900 via-black to-black"></div>
 
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-700 opacity-30 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-600 opacity-30 rounded-full blur-3xl animate-pulse delay-1500"></div>
@@ -109,7 +109,7 @@ const VerifyUser = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold hover:opacity-90 transition-all disabled:opacity-50 mt-6"
+            className="w-full py-3 rounded-lg bg-linear-to-r from-purple-600 to-blue-500 text-white font-semibold hover:opacity-90 transition-all disabled:opacity-50 mt-6"
           >
             {loading ? "Verifying..." : "Verify Email"}
           </button>

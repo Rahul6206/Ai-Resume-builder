@@ -98,7 +98,7 @@ const MyResumes = () => {
     if (loading) {
         return (
             <div className="min-h-screen bg-black text-white font-sans flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
                 <div className="relative z-10 flex flex-col items-center gap-4">
                     <div className="p-4 bg-zinc-900/50 rounded-2xl border border-white/10 shadow-xl backdrop-blur-sm">
                         <Loader2 className="animate-spin text-purple-500" size={32} />
@@ -113,7 +113,7 @@ const MyResumes = () => {
         <div className="min-h-screen bg-black text-white selection:bg-purple-500/30 selection:text-purple-200 font-sans relative">
 
             <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[128px]"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[128px]"></div>
             </div>
@@ -164,7 +164,7 @@ const MyResumes = () => {
             <div className="relative z-10 flex flex-col min-h-screen">
                 <Navbar />
 
-                <main className="flex-grow max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
+                <main className="grow max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
 
                     {error ? (
                         <div className="flex flex-col items-center justify-center h-[60vh]">
@@ -197,7 +197,7 @@ const MyResumes = () => {
                                     onClick={handleCreateNew}
                                     className="
                                         group flex items-center gap-2 px-6 py-3 rounded-xl font-semibold cursor-pointer
-                                        bg-gradient-to-r from-purple-600 to-indigo-600 text-white 
+                                        bg-linear-to-r from-purple-600 to-indigo-600 text-white 
                                         shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 
                                         hover:scale-[1.02] active:scale-[0.98]
                                         transition-all duration-300
@@ -219,7 +219,7 @@ const MyResumes = () => {
                                         onClick={handleCreateNew}
                                         className="
                                             flex items-center gap-2 px-8 py-3 rounded-xl font-semibold cursor-pointer
-                                            bg-gradient-to-r from-emerald-500 to-teal-500 text-white 
+                                            bg-linear-to-r from-emerald-500 to-teal-500 text-white 
                                             shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40
                                             hover:scale-[1.02] active:scale-[0.98]
                                             transition-all duration-300
@@ -282,7 +282,7 @@ const MyResumes = () => {
                                                         className="
                                                             flex items-center justify-center gap-2 px-4 py-2.5 
                                                             rounded-xl text-sm font-bold cursor-pointer
-                                                            bg-gradient-to-r from-emerald-600 to-teal-600 text-white
+                                                            bg-linear-to-r from-emerald-600 to-teal-600 text-white
                                                             hover:from-emerald-500 hover:to-teal-500
                                                             hover:shadow-lg hover:shadow-emerald-500/30
                                                             transition-all duration-300 group/btn
