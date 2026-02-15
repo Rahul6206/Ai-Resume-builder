@@ -350,7 +350,7 @@ const CreateResume = () => {
     <div className="min-h-screen bg-black text-white selection:bg-purple-500/30 selection:text-purple-200 font-sans">
       {/* Background Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]" />
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[128px]" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[128px]" />
       </div>
@@ -358,7 +358,7 @@ const CreateResume = () => {
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
 
-        <div className="flex-grow pt-32 pb-20 px-4 md:px-8">
+        <div className="grow pt-32 pb-20 px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             {/* Edit Mode Badge */}
             {isEditMode && (
@@ -374,7 +374,7 @@ const CreateResume = () => {
 
             {/* Form Container */}
             <div className="bg-zinc-900/30 backdrop-blur-xl rounded-3xl border border-white/5 p-8 md:p-12 mb-8 shadow-2xl relative overflow-hidden">
-  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500/50 via-indigo-500/50 to-transparent" />
+  <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-purple-500/50 via-indigo-500/50 to-transparent" />
 
   {currentStep === 1 && (
     <Step1Contact

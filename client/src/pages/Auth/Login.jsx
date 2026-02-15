@@ -91,7 +91,7 @@ const Login = () => {
         <div className="min-h-screen w-full flex items-center justify-center px-5 relative overflow-hidden bg-black text-white font-sans selection:bg-purple-500/30 selection:text-purple-200">
 
             <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
                 <div className="absolute top-0 left-0 w-72 h-72 bg-purple-900/20 rounded-full blur-[128px]"></div>
                 <div className="absolute bottom-0 right-0 w-72 h-72 bg-indigo-900/10 rounded-full blur-[128px]"></div>
             </div>
@@ -172,7 +172,7 @@ const Login = () => {
                                 hover:scale-[1.02] hover:shadow-purple-900/30
                             "
                         >
-                            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-600 to-indigo-600 transition-all duration-300 group-hover:brightness-110"></div>
+                            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-purple-600 to-indigo-600 transition-all duration-300 group-hover:brightness-110"></div>
 
                             <div className="relative flex items-center justify-center gap-2 text-white">
                                 {loading ? (

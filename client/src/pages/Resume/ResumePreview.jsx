@@ -67,7 +67,7 @@ const ResumePreview = () => {
     if (!resume) {
         return (
             <div className="min-h-screen bg-black text-white font-sans flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
                 <div className="relative z-10 flex flex-col items-center gap-4">
                     <div className="p-4 bg-zinc-900/50 rounded-2xl border border-white/10 shadow-xl backdrop-blur-sm">
                         <Loader2 className="animate-spin text-purple-500" size={32} />
@@ -88,7 +88,7 @@ const ResumePreview = () => {
         <div className="min-h-screen bg-black text-white selection:bg-purple-500/30 selection:text-purple-200 font-sans">
 
             <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[128px]"></div>
                 <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[128px]"></div>
             </div>
@@ -96,7 +96,7 @@ const ResumePreview = () => {
             <div className="relative z-10 flex flex-col min-h-screen">
                 <Navbar />
 
-                <main className="max-w-[90rem] mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
+                <main className="max-w-360 mx-auto px-6 lg:px-8 pt-32 pb-20 w-full">
 
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12 animate-fade-up">
                         <div>
@@ -119,7 +119,7 @@ const ResumePreview = () => {
                             <div className="h-full bg-zinc-900/40 backdrop-blur-2xl rounded-3xl border border-white/5 p-6 shadow-2xl relative overflow-hidden flex flex-col">
 
                                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/5">
-                                    <div className="w-14 h-14 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl border border-white/10 flex items-center justify-center shadow-inner">
+                                    <div className="w-14 h-14 bg-linear-to-br from-zinc-800 to-zinc-900 rounded-2xl border border-white/10 flex items-center justify-center shadow-inner">
                                         <User size={28} className="text-zinc-400" />
                                     </div>
                                     <div>
@@ -128,7 +128,7 @@ const ResumePreview = () => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-6 flex-grow">
+                                <div className="space-y-6 grow">
                                     <div>
                                         <h3 className="text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-3 flex items-center gap-2">
                                             <div className="w-1 h-3 bg-purple-500 rounded-full"></div>
@@ -200,7 +200,7 @@ const ResumePreview = () => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-3 flex-grow">
+                                <div className="space-y-3 grow">
                                     {templates.map((tpl) => (
                                         <button
                                             key={tpl.id}
@@ -259,7 +259,7 @@ const ResumePreview = () => {
                                         ${loadingType === 'pdf' ? "cursor-not-allowed opacity-80" : "hover:scale-[1.02] hover:shadow-emerald-900/40"}
                                     `}
                                 >
-                                    <div className={`absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-600 to-teal-600 transition-all duration-300 ${loadingType === 'pdf' ? "" : "group-hover:brightness-110"}`}></div>
+                                    <div className={`absolute inset-0 w-full h-full bg-linear-to-r from-emerald-600 to-teal-600 transition-all duration-300 ${loadingType === 'pdf' ? "" : "group-hover:brightness-110"}`}></div>
 
                                     <div className="relative flex items-center justify-center gap-3 text-white">
                                         {loadingType === 'pdf' ? (
