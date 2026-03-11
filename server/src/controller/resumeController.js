@@ -2,6 +2,7 @@ const Resume = require("../models/resume");
 const { resumeSchema } = require("../validations/resumeValidation/resumeValidation");
 const mongoose = require("mongoose");
 
+
 async function createResume(req, res) {
   try {
     // Convert ObjectId → string for Zod validation
@@ -9,12 +10,13 @@ async function createResume(req, res) {
       ...req.body,
       user: req.user?._id?.toString(),
     };
-
+   
     // Validate incoming data
     const result = resumeSchema.safeParse(dataToValidate);
+    
 
     if (!result.success) {
-      console.error("Validation Error:", result.error);
+      console.error("Validation Error:", result.error); 
       return res.status(400).json({
         success: false,
         message: "Validation error",
