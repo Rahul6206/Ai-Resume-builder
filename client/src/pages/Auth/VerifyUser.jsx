@@ -58,7 +58,6 @@ const VerifyUser = () => {
       const msg =
         error.response?.data?.message || "Verification failed. Try again.";
       toast.error(msg);
-      console.log("Verification Error:", error.response?.data);
     } finally {
       setLoading(false);
     }

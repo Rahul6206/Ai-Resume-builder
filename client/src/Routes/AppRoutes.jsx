@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Routes ,Route } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import VerifyUser from "../pages/Auth/VerifyUser";
-import CreateResume from "../pages/Resume/CreateResume";
 import GenerateAiResume from "../pages/Resume/GenerateAiResume";
 import ResumePreview from "../pages/Resume/ResumePreview";
 import Home from "../pages/General/Home";
 import MyResume from "../pages/Resume/MyResume";
 import NotFound from "../pages/General/NotFound";
+import CreateResume from "../pages/Resume/CreateResumee";
 
 
 
