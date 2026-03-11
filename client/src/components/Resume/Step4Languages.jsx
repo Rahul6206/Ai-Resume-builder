@@ -18,7 +18,7 @@ const SimpleInputList = ({
         <div className="flex justify-between items-start mb-6">
             <div className="flex gap-4">
                 <div className={`p-3 rounded-xl ${colorClass} bg-opacity-10`}>
-                    <Icon size={24} className={colorClass.replace("bg-", "text-")} />
+                    <Icon size={24} className={colorClass?.replace("bg-", "text-")} />
                 </div>
                 <div>
                     <h3 className="text-lg font-bold text-white">{title}</h3>
@@ -27,7 +27,10 @@ const SimpleInputList = ({
             </div>
             <button
                 type="button"
-                onClick={() => setFormData((prev) => ({ ...prev, [fieldName]: [...prev[fieldName], ""] }))}
+                onClick={() => setFormData((prev) => ({ 
+                    ...prev, 
+                    [fieldName]: [...(prev[fieldName] || []), ""] 
+                }))}
                 className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-medium text-white transition-all hover:border-purple-500/30"
             >
                 <Plus size={14} /> Add
@@ -35,56 +38,68 @@ const SimpleInputList = ({
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {items.map((item, idx) => (
-                <div key={idx} className="relative group">
-                    <input
-                        type="text"
-                        value={item}
-                        onChange={(e) => handleArrayInputChange(fieldName, idx, "", e.target.value)}
-                        className="
-                            w-full pl-4 pr-10 py-3 
-                            bg-black/40 border border-white/10 rounded-xl 
-                            text-white placeholder-zinc-600 
-                            focus:outline-none focus:border-purple-500/50 focus:bg-zinc-900/50 
-                            transition-all
-                        "
-                        placeholder={placeholder}
-                    />
-                    {items.length > 1 && (
-                        <button
-                            type="button"
-                            onClick={() => removeArrayItem(fieldName, idx)}
-                            className="absolute right-2 top-2.5 text-zinc-600 hover:text-red-400 p-1 hover:bg-white/5 rounded transition-colors"
-                        >
-                            <X size={16} />
-                        </button>
-                    )}
-                </div>
-            ))}
+            {items.map((item, idx) => {
+                // Yahan value nikaalte waqt check kar rahe hain
+                const displayValue = typeof item === 'object' ? (item[""] || "") : item;
+                
+                return (
+                    <div key={`${fieldName}-${idx}`} className="relative group">
+                        <input
+                            type="text"
+                            value={displayValue}
+                            // 4th argument me value bhej rahe hain kyunki aapka function object update karta hai
+                            onChange={(e) => handleArrayInputChange(fieldName, idx, "", e.target.value)}
+                            className="w-full pl-4 pr-10 py-3 bg-black/40 border border-white/10 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-purple-500/50 focus:bg-zinc-900/50 transition-all"
+                            placeholder={placeholder}
+                        />
+                        {items.length > 1 && (
+                            <button
+                                type="button"
+                                onClick={() => removeArrayItem(fieldName, idx)}
+                                className="absolute right-2 top-2.5 text-zinc-600 hover:text-red-400 p-1 hover:bg-white/5 rounded transition-colors"
+                            >
+                                <X size={16} />
+                            </button>
+                        )}
+                    </div>
+                );
+            })}
         </div>
     </div>
 );
 
+
+
+
 const Step4Languages = React.forwardRef(({ formData, handleArrayInputChange, removeArrayItem, validationRules, setFormData }, ref) => {
+const validate = () => {
+    // Helper function to extract string safely
+    const extractString = (val) => typeof val === 'object' ? (val[""] || "") : (val || "");
 
-    const validate = () => {
-        const validLanguages = formData.languages.filter(l => l.trim().length > 0);
-        const validInterests = formData.interests.filter(i => i.trim().length > 0);
+    const validLanguages = formData.languages
+        .map(extractString)
+        .filter(l => l.trim().length > 0);
+        
+    const validInterests = formData.interests
+        .map(extractString)
+        .filter(i => i.trim().length > 0);
 
-        for (let lang of validLanguages) {
-            if (!validationRules.language.validate(lang)) {
-                toast.error(`Language: ${validationRules.language.error}`);
-                return false;
-            }
+    for (let lang of validLanguages) {
+        if (!validationRules.language.validate(lang)) {
+            toast.error(`Language: ${validationRules.language.error}`);
+            return false;
         }
-        for (let interest of validInterests) {
-            if (!validationRules.interest.validate(interest)) {
-                toast.error(`Interest: ${validationRules.interest.error}`);
-                return false;
-            }
+    }
+    for (let interest of validInterests) {
+        if (!validationRules.interest.validate(interest)) {
+            toast.error(`Interest: ${validationRules.interest.error}`);
+            return false;
         }
-        return true;
-    };
+    }
+    return true;
+};
+
+
 
     React.useImperativeHandle(ref, () => ({
         validate: validate

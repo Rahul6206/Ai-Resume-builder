@@ -109,7 +109,7 @@ const Navbar = () => {
                             </Link>
                         )}
 
-                        <div className="h-6 w-[1px] bg-white/10 mx-2"></div>
+                        <div className="h-6 w-px bg-white/10 mx-2"></div>
 
                         <a
                             href={GITHUB_REPO_URL}
@@ -180,7 +180,7 @@ const Navbar = () => {
                             </Link>
                         )}
 
-                        <div className="h-[1px] bg-white/5 my-4"></div>
+                        <div className="h-px bg-white/5 my-4"></div>
 
                         <a
                             href={GITHUB_REPO_URL}

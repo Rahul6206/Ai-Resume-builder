@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-black text-white selection:bg-purple-500/30 selection:text-purple-200 font-sans overflow-x-hidden">
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-[128px]"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[128px]"></div>
       </div>
@@ -52,7 +52,7 @@ const Home = () => {
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight animate-fade-up" style={{ animationDelay: '0.1s' }}>
                   Build a Resume That  <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400">
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400">
                    Fast Tracks Your Interview
                   </span>
                 </h1>
@@ -118,14 +118,14 @@ const Home = () => {
             </div>
 
             <div className="lg:col-span-5 relative animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-3xl blur-2xl"></div>
+              <div className="absolute inset-0 bg-linear-to-tr from-purple-500/10 to-blue-500/10 rounded-3xl blur-2xl"></div>
 
               <div className="relative bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-transparent opacity-50"></div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-purple-500 via-indigo-500 to-transparent opacity-50"></div>
 
                 <h3 className="text-xl font-bold text-white mb-8">Seamless Process</h3>
 
-                <div className="relative space-y-8 before:absolute before:left-6 before:top-2 before:bottom-2 before:w-[2px] before:bg-white/10">
+                <div className="relative space-y-8 before:absolute before:left-6 before:top-2 before:bottom-2 before:w-0.5 before:bg-white/10">
 
                   <div className="relative flex gap-6 group">
                     <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 border border-white/10 group-hover:border-purple-500/50 transition-colors shadow-lg">

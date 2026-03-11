@@ -7,8 +7,6 @@ const connectDB = async () => {
         console.log("MongoDB Connected");
     } catch (err) {
         console.error(err,"Error ho gaya");
-        console.log(process.env.MONGO_URI);
-        console.log(process.env.JWT_SECRET)
         process.exit(1);
     }
 };
