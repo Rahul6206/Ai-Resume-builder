@@ -45,7 +45,6 @@ const Register = () => {
                         }
                     } catch (error) {
                         toast.error("Failed to send verification code. Please try again.");
-                        console.log("REgister OTP Send Error:", error.response?.data);
                     }
 
                 if (res.data.user) {
@@ -55,7 +54,6 @@ const Register = () => {
                 navigate("/user/verifyUser", { state: { email: formData.email } });
             }
         } catch (error) {
-            console.log("Full error:", error.response?.data);
             const msg =
                 error.response?.data?.message || "Registration failed. Try again.";
             toast.error(msg);

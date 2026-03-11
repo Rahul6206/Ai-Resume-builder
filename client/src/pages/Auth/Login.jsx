@@ -63,8 +63,6 @@ const Login = () => {
         } catch (error) {
             const msg = error.response?.data?.message || "Login failed. Try again.";
             toast.error(msg);
-            console.log(error.response.data)
-            console.log("Login Error:", error.response?.data);
             if (
                 error.response?.status === 403 &&
                 error.response.data.action === "VERIFY_OTP"
@@ -79,7 +77,6 @@ const Login = () => {
                     }
                 } catch (error) {
                     toast.error("Failed to send verification code. Please try again.");
-                    console.log("Login OTP Send Error:", res.data);
                 }
             }
         } finally {
