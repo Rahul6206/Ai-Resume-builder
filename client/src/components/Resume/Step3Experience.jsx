@@ -4,34 +4,34 @@ import { Plus, X, Briefcase, FolderGit2, Award, Terminal } from 'lucide-react';
 
 
 
- const Input = ({ label, value, onChange, placeholder, type = "text" }) => (
-        <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
-            <input
-                type={type}
-                value={value}
-                onChange={onChange}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 transition-all"
-                placeholder={placeholder}
-            />
-        </div>
-    );
+const Input = ({ label, value, onChange, placeholder, type = "text" }) => (
+    <div className="space-y-1.5">
+        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
+        <input
+            type={type}
+            value={value}
+            onChange={onChange}
+            className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 transition-all"
+            placeholder={placeholder}
+        />
+    </div>
+);
 
-    // Reusable TextArea
-    const TextArea = ({ label, value, onChange, placeholder, height = "h-20" }) => (
-        <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
-            <textarea
-                value={value}
-                onChange={onChange}
-                className={`w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 transition-all resize-none ${height}`}
-                placeholder={placeholder}
-            />
-        </div>
-    );
+// Reusable TextArea
+const TextArea = ({ label, value, onChange, placeholder, height = "h-20" }) => (
+    <div className="space-y-1.5">
+        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{label}</label>
+        <textarea
+            value={value}
+            onChange={onChange}
+            className={`w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-purple-500/50 transition-all resize-none ${height}`}
+            placeholder={placeholder}
+        />
+    </div>
+);
 
 const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, removeArrayItem, addArrayItem, validationRules, setFormData }, ref) => {
- 
+
 
     const validate = () => {
 
@@ -40,10 +40,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
             (s) => s.name?.trim().length > 0
         );
 
-        if (validSkills.length === 0) {
-            toast.error("At least one skill required");
-            return false;
-        }
+        
 
         for (let skill of validSkills) {
             if (!validationRules.skill.validate(skill.name)) {
@@ -172,7 +169,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
     );
 
     // Reusable Input
-   
+
 
     return (
         <div className="space-y-12 animate-fade-up">
@@ -194,7 +191,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                             <input
                                 type="text"
                                 value={skill.name}
-                                onChange={(e) => handleArrayInputChange("technicalSkills", idx, "name", e.target.value)}
+                                onChange={(e) => handleArrayInputChange("technicalSkills", idx, "", e.target.value)}
                                 className="w-full pl-10 pr-10 py-3 bg-zinc-900/30 border border-white/5 rounded-xl text-white focus:outline-none focus:border-purple-500/50 focus:bg-zinc-900/50 transition-all"
                                 placeholder="e.g. React.js"
                             />
@@ -220,7 +217,7 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                     buttonText="Add Experience"
                 />
                 <div className="space-y-6">
-                    {formData.workExperience.map((work, idx) => { 
+                    {formData.workExperience.map((work, idx) => {
 
                         return (
                             <div
@@ -247,11 +244,11 @@ const Step3Experience = React.forwardRef(({ formData, handleArrayInputChange, re
                                         }
                                         placeholder="Google"
                                     /><Input label="Position *" value={work.position} onChange={(e) => handleArrayInputChange("workExperience", idx, "position", e.target.value)} placeholder="Senior Developer" />
-                                <Input label="Start Date *" type="date" value={work.startDate} onChange={(e) => handleArrayInputChange("workExperience", idx, "startDate", e.target.value)} />
-                                <Input label="End Date" type="date" value={work.endDate} onChange={(e) => handleArrayInputChange("workExperience", idx, "endDate", e.target.value)} />
-                                <div className="md:col-span-2">
-                                    <TextArea label="Description" value={work.description} onChange={(e) => handleArrayInputChange("workExperience", idx, "description", e.target.value)} placeholder="Describe your key responsibilities and achievements..." />
-                                </div>
+                                    <Input label="Start Date *" type="date" value={work.startDate} onChange={(e) => handleArrayInputChange("workExperience", idx, "startDate", e.target.value)} />
+                                    <Input label="End Date" type="date" value={work.endDate} onChange={(e) => handleArrayInputChange("workExperience", idx, "endDate", e.target.value)} />
+                                    <div className="md:col-span-2">
+                                        <TextArea label="Description" value={work.description} onChange={(e) => handleArrayInputChange("workExperience", idx, "description", e.target.value)} placeholder="Describe your key responsibilities and achievements..." />
+                                    </div>
                                 </div>
                             </div>
                         );
