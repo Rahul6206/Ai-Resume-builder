@@ -51,7 +51,7 @@ const StepIndicator = ({ currentStep }) => {
                             {idx < steps.length - 1 && (
                                 <div
                                     className={`
-                                        absolute top-5 left-1/2 w-[calc(100%*2)] h-[2px] -z-20 origin-left transition-all duration-700
+                                        absolute top-5 left-1/2 w-[calc(100%*2)] h-0.5 -z-20 origin-left transition-all duration-700
                                         ${step.num < currentStep ? "bg-linear-to-r from-purple-600 to-indigo-600 scale-x-100" : "bg-transparent scale-x-0"}
                                     `}
                                 />
