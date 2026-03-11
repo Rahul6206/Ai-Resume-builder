@@ -22,9 +22,10 @@ app.use(cors({
 
 connectDB();
 
+
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
-app.use("/api", resumeRoutes);
+app.use("/api/resume", resumeRoutes);
 app.use("/api/ai", aiRoutes);
 app.get("/", (req, res) => {
   res.json({ status: "API is running 🚀" });
