@@ -5,7 +5,9 @@ export const registerUser = (formData) => {
 };
 
 export const loginUser = (formData) => {
-    return api.post("/api/auth/user/login", formData);
+    return api.post("/api/auth/user/login", formData,{
+        withCredentials: true
+    });
 };
 
 export const verifyOtp = (formData) => {
