@@ -65,18 +65,13 @@ function clearAuthCookies(res) {
   res.clearCookie("refreshToken", refreshCookieOptions);
 }
 
+
+
+
 async function registerUser(req, res) {
   try {
-    const result = signupValidation.safeParse(req.body);
-    if (!result.success) {
-      return res.status(400).json({
-        success: false,
-        message: "Validation error",
-        errors: result.error.issues.map((err) => ({ field: err.path[0], message: err.message })),
-      });
-    }
 
-    const { fullname, email, password } = result.data;
+    const { fullname, email, password } = req.body;
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ success: false, message: "User already exists with this email" });
@@ -106,6 +101,9 @@ async function loginUser(req, res) {
 
     if (!user) {
       return res.status(401).json({ success: false, message: "Invalid email or password" });
+    }
+    if(!user.isVerified){
+      return res.status(403).json({ success: false,action: "VERIFY_OTP", message: "Unverified User" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -195,7 +193,7 @@ async function sendOtp(req, res) {
     const emailSent = await sendVerificationEmail(email, verifyCode, "verify");
 
     if (!emailSent) {
-      return res.status(500).json({ success: false, message: "Failed to send verification email" });
+      return res.status(500).json({ success: false, message: "Failed to send verification email"});
     }
 
     user.verifyCodeHash = hashToken(verifyCode);

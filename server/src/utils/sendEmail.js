@@ -21,7 +21,7 @@ async function sendVerificationEmail(to, code, mode = "verify") {
     const template = getTemplate(mode, to, code);
 
     const emailData = {
-      sender: { name: "CVPilot", email: process.env.MAIL_SENDER || "noreply@cvpilot.ai" },
+      sender: { name: "CVPilot"},
       to: [{ email: to }],
       subject: template.subject,
       htmlContent: `
@@ -44,7 +44,7 @@ async function sendVerificationEmail(to, code, mode = "verify") {
     await apiInstance.sendTransacEmail(emailData);
     return true;
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.log("Error sending email:", error.message);
     return false;
   }
 }

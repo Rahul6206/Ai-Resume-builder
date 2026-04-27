@@ -2,7 +2,7 @@ const { z } = require("zod");
 
 const strongPassword = z
   .string()
-  .min(8, "Password must be at least 8 characters")
+  .min(4, "Password must be at least 8 characters")
   .max(72, "Password must not exceed 72 characters")
   .regex(/[A-Z]/, "Password must include at least one uppercase letter")
   .regex(/[a-z]/, "Password must include at least one lowercase letter")
