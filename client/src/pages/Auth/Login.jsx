@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Mail, Lock, Loader2, ArrowRight, Sparkles } from "lucide-react";
-import { loginUser, sendOtp } from "../../api/authApi";
+import { sendOtp } from "../../api/authApi";
+import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
+    const lastSubmitRef = useRef(0);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -47,17 +50,16 @@ const Login = () => {
 
         try {
             setLoading(true);
-            const res = await loginUser({
+            if (Date.now() - lastSubmitRef.current < 800) return;
+            lastSubmitRef.current = Date.now();
+
+            const res = await login({
                 email: formData.email.toLowerCase(),
                 password: formData.password,
             });
 
             if (res.data.success) {
                 toast.success("Login successful!");
-
-
-                localStorage.setItem("user", JSON.stringify(res.data.user));
-
                 navigate("/");
             }
         } catch (error) {
@@ -135,6 +137,7 @@ const Login = () => {
 
                         <div className="space-y-2">
                             <div className="flex justify-between items-center ml-1">
+                                <Link to="/user/forgot-password" className="text-xs text-purple-300 hover:underline">Forgot password?</Link>
                                 <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
                                     Password
                                 </label>

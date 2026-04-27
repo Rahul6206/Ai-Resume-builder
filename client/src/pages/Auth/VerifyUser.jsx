@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 import { Lock } from "lucide-react";
 import { verifyOtp } from "../../api/authApi";
 import { toast } from "react-toastify";
@@ -8,6 +9,7 @@ const VerifyUser = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
+  const { setUser } = useAuth();
   const [verifyCode, setVerifyCode] = useState("");
   const [email, setEmail] = useState("");
 
@@ -50,7 +52,7 @@ const VerifyUser = () => {
       });
       
       if (res.data.success) {
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setUser(res.data.user || null);
         toast.success("Email verified successfully!");
         navigate("/");
       }

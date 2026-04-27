@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Mail, Lock, User, Loader2, ArrowRight, Sparkles } from "lucide-react";
 import { registerUser, sendOtp } from "../../api/authApi";
 import { toast } from "react-toastify";
@@ -14,6 +14,7 @@ const Register = () => {
     });
 
     const [loading, setLoading] = useState(false);
+    const lastSubmitRef = useRef(0);
 
     // handle input change
     const handleChange = (e) => {
@@ -34,7 +35,10 @@ const Register = () => {
 
         try {
             setLoading(true);
-            const res = await registerUser(formData);
+            if (Date.now() - lastSubmitRef.current < 800) return;
+            lastSubmitRef.current = Date.now();
+
+            const res = await registerUser({ ...formData, email: formData.email.toLowerCase().trim() });
 
             if (res.data.success) {
                 // toast.success("Verification code sent to your email.");
@@ -46,10 +50,6 @@ const Register = () => {
                     } catch (error) {
                         toast.error("Failed to send verification code. Please try again.");
                     }
-
-                if (res.data.user) {
-                    localStorage.setItem("user", JSON.stringify(res.data.user));
-                }
 
                 navigate("/user/verifyUser", { state: { email: formData.email } });
             }

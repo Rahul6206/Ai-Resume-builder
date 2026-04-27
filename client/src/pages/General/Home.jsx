@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuth } from "../../context/AuthContext";
 import Navbar from "../../components/UserInterface/Navbar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +8,7 @@ import Footer from "../../components/UserInterface/Footer";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-purple-500/30 selection:text-purple-200 font-sans overflow-x-hidden">
@@ -85,18 +87,7 @@ const Home = () => {
               <div className="animate-fade-up" style={{ animationDelay: '0.4s' }}>
                 <button
                   onClick={() => {
-                    const isLoggedIn = () => {
-                      try {
-                        
-                        if (typeof localStorage !== "undefined") {
-                          const user = localStorage.getItem("user");
-                          return !!user;
-                        }
-                      } catch (e) { }
-                      return false;
-                    };
-
-                    if (!isLoggedIn()) {
+if (!user) {
                       toast.info("Please sign up to create your resume");
                       navigate("/user/register");
                     } else {
