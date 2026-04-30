@@ -334,7 +334,7 @@ async function getCurrentUser(req, res) {
 function getCsrfToken(req, res) {
   const csrfToken = crypto.randomBytes(24).toString("hex");
   res.cookie("csrfToken", csrfToken, {
-    httpOnly: false,
+    httpOnly: true,
     secure: isProduction,
     sameSite: isProduction ? "none" : "lax",
     path: "/",

@@ -55,7 +55,7 @@ const Home = () => {
                 <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight animate-fade-up" style={{ animationDelay: '0.1s' }}>
                   Build a Resume That  <br />
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-indigo-400 to-blue-400">
-                   Fast Tracks Your Interview
+                    Fast Tracks Your Interview
                   </span>
                 </h1>
                 <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed animate-fade-up" style={{ animationDelay: '0.2s' }}>
@@ -87,7 +87,7 @@ const Home = () => {
               <div className="animate-fade-up" style={{ animationDelay: '0.4s' }}>
                 <button
                   onClick={() => {
-if (!user) {
+                    if (!user) {
                       toast.info("Please sign up to create your resume");
                       navigate("/user/register");
                     } else {
@@ -200,7 +200,7 @@ if (!user) {
 
         </main>
       </div>
-      <Footer/>
+      <Footer />
     </div>
 
   );
