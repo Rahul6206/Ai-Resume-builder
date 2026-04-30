@@ -6,7 +6,7 @@ import Navbar from "../../components/UserInterface/Navbar";
 import Footer from "../../components/UserInterface/Footer";
 
 const GenerateAiResume = () => {
-  const { resumeId, template } = useParams();
+  const {  template } = useParams();
   const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(true);
 

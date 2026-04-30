@@ -81,7 +81,8 @@ const ResumePreview = () => {
     const templates = [
         { id: "modern", name: "Modern", desc: "Clean & minimalistic", color: "bg-blue-500" },
         { id: "creative", name: "Creative", desc: "Bold & colorful", color: "bg-purple-500" },
-        { id: "executive", name: "Executive", desc: "Professional & strict", color: "bg-emerald-500" }
+        { id: "executive", name: "Executive", desc: "Professional & strict", color: "bg-emerald-500" },
+        { id: "minimalist", name: "Minimalist", desc: "Simple & Clean", color: "bg-emerald-500" }
     ];
 
     return (

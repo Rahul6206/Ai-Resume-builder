@@ -2,7 +2,7 @@ const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/users");
-const sendVerificationEmail = require("../utils/sendEmail");
+const sendVerificationEmail = require("../utils/sendEmail.js");
 const { signupValidation } = require("../validations/userValidation/signupValidation");
 const { loginValidation } = require("../validations/userValidation/loginuserValidation");
 const { verifySchema, emailSchema, resetPasswordSchema } = require("../validations/userValidation/validate");
@@ -186,13 +186,14 @@ async function sendOtp(req, res) {
     }
 
     const { email } = result.data;
+    
     const user = await userModel.findOne({ email }).select("+verifyCodeHash +verifyCodeExpiry");
 
     if (!user) return res.status(404).json({ success: false, message: "User not found" });
     if (user.isVerified) return res.status(400).json({ success: false, message: "Email already verified" });
 
     const verifyCode = generateOtp();
-    const emailSent = await sendVerificationEmail(email, verifyCode, "verify");
+    const emailSent = await sendVerificationEmail(email, verifyCode);
 
     if (!emailSent) {
       return res.status(500).json({ success: false, message: "Failed to send verification email" });
@@ -204,6 +205,7 @@ async function sendOtp(req, res) {
 
     return res.status(200).json({ success: true, message: "OTP sent successfully" });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ success: false, message: "Server error" });
   }
 }

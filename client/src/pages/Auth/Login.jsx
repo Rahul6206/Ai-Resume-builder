@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Mail, Lock, Loader2, ArrowRight, Sparkles } from "lucide-react";
-import { sendOtp } from "../../api/authApi";
-import { useAuth } from "../../context/AuthContext";
+import { sendOtp } from "../../api/authApi.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -65,7 +65,9 @@ const Login = () => {
         } catch (error) {
             const msg = error.response?.data?.message || "Login failed. Try again.";
             toast.error(msg);
-            if (
+            console.log(error.response.data.action)
+            console.log(error.response?.status)
+            if ( 
                 error.response?.status === 403 &&
                 error.response.data.action === "VERIFY_OTP"
             ) {
@@ -74,7 +76,7 @@ const Login = () => {
                     const { email } = error.response.data;
                     const res = await sendOtp({ email })
                     if (res.data.success) {
-                        navigate("/user/verifyUser", { state: { email: error.response.data.email } });
+                        navigate("/user/verifyUser", { state: { email:email } });
                         toast.success("Verification code sent to your email.");
                     }
                 } catch (error) {

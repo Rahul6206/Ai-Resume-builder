@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Simple Resume</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.4; }
+        .page { width: 210mm; min-height: 297mm; margin: 20px auto; padding: 30px; background: #fff; }
+        
+        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 15px; }
+        .name { font-size: 22pt; font-weight: bold; text-transform: uppercase; }
+        .title { font-size: 12pt; color: #666; margin-top: 5px; }
+        .contact { font-size: 10pt; margin-top: 8px; }
+        
+        h2 { font-size: 13pt; text-transform: uppercase; color: #333; border-bottom: 1px solid #333; margin: 15px 0 10px; padding-bottom: 3px; }
+        
+        .item { margin-bottom: 12px; }
+        .item-title { font-weight: bold; }
+        .item-sub { color: #666; font-size: 10pt; }
+        .item-desc { margin-top: 3px; }
+        
+        .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill { background: #f0f0f0; padding: 3px 10px; border-radius: 3px; font-size: 10pt; }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="name">{{fullname}}</div>
+            <div class="title">{{jobTitle}}</div>
+            <div class="contact">
+                {{email}} | {{phone}}
+                {{#if linkedin}} | {{linkedin}}{{/if}}
+            </div>
+        </div>
+
+        <h2>Summary</h2>
+        <p>{{profileSummary}}</p>
+
+        <h2>Skills</h2>
+        <div class="skills">
+            {{#each technicalSkills}}
+            <span class="skill">{{this}}</span>
+            {{/each}}
+        </div>
+
+        <h2>Experience</h2>
+        {{#each workExperience}}
+        <div class="item">
+            <div class="item-title">{{position}} — {{company}}</div>
+            <div class="item-sub">{{formatRange startDate endDate}}</div>
+            <div class="item-desc">{{description}}</div>
+        </div>
+        {{/each}}
+
+        <h2>Projects</h2>
+        {{#each projects}}
+        <div class="item">
+            <div class="item-title">{{title}}</div>
+            <div class="item-sub">{{#each technologies}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</div>
+            <div class="item-desc">{{description}}</div>
+        </div>
+        {{/each}}
+
+        <h2>Education</h2>
+        {{#each education}}
+        <div class="item">
+            <div class="item-title">{{degree}}</div>
+            <div class="item-sub">{{institution}} ({{startYear}} - {{endYear}}){{#if percentage}} • {{percentage}}%{{/if}}</div>
+        </div>
+        {{/each}}
+
+        <h2>Languages</h2>
+        <p>{{#each languages}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+    </div>
+</body>
+
+</html>
