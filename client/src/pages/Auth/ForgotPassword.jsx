@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { forgotPassword } from "../../api/authApi";
 
 const ForgotPassword = () => {
+const navigate= useNavigate();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -12,7 +13,10 @@ const ForgotPassword = () => {
     try {
       setLoading(true);
       await forgotPassword({ email: email.trim().toLowerCase() });
-      toast.success("If account exists, reset code was sent.");
+      toast.success("reset send to email");
+      
+        navigate("/user/reset-password", { state: { email } })
+      
     } catch {
       toast.error("Request failed. Please try again.");
     } finally {
