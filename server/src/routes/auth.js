@@ -12,6 +12,5 @@ router.post("/user/forgot-password", authController.forgotPassword);
 router.post("/user/reset-password", authController.resetPassword);
 router.post("/user/refresh", authController.refreshToken);
 router.get("/user/me", verifyToken, authController.getCurrentUser);
-router.get("/user/csrf-token", authController.getCsrfToken);
 
 module.exports = router;

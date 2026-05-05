@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { fetchCsrfToken, getCurrentUser, loginUser, logoutUser } from "../api/authApi";
+import { getCurrentUser, loginUser, logoutUser } from "../api/authApi";
 
 const AuthContext = createContext(null);
 
@@ -9,11 +9,15 @@ export function AuthProvider({ children }) {
 
   const bootstrapAuth = useCallback(async () => {
     try {
-      await fetchCsrfToken();
+      const token = localStorage.getItem("accessToken");
+      if (!token) throw new Error("No token found");
+      
       const res = await getCurrentUser();
       setUser(res.data.user || null);
     } catch {
       setUser(null);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
     } finally {
       setLoading(false);
     }
@@ -21,17 +25,41 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     bootstrapAuth();
+    
+    // Listen for custom event from axios interceptor when refresh completely fails
+    const handleAuthExpired = () => {
+      setUser(null);
+    };
+    
+    window.addEventListener("auth-expired", handleAuthExpired);
+    return () => window.removeEventListener("auth-expired", handleAuthExpired);
   }, [bootstrapAuth]);
 
   const login = useCallback(async (payload) => {
     const res = await loginUser(payload);
+    
+    if (res.data.accessToken && res.data.refreshToken) {
+      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
+    }
+    
     setUser(res.data.user || null);
     return res;
   }, []);
 
   const logout = useCallback(async () => {
-    await logoutUser();
-    setUser(null);
+    const refreshToken = localStorage.getItem("refreshToken");
+    try {
+      if (refreshToken) {
+        await logoutUser({ refreshToken });
+      }
+    } catch (error) {
+      console.error("Logout error", error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      setUser(null);
+    }
   }, []);
 
   const value = useMemo(() => ({ user, loading, setUser, login, logout, bootstrapAuth }), [user, loading, login, logout, bootstrapAuth]);

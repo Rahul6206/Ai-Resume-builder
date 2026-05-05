@@ -11,22 +11,6 @@ const isProduction = process.env.NODE_ENV === "production";
 const ACCESS_TOKEN_TTL = "15m";
 const REFRESH_TOKEN_TTL = "7d";
 
-const accessCookieOptions = {
-  httpOnly: true,
-  secure: isProduction,
-  sameSite: isProduction ? "none" : "lax",
-  path: "/",
-  maxAge: 15 * 60 * 1000,
-};
-
-const refreshCookieOptions = {
-  httpOnly: true,
-  secure: isProduction,
-  sameSite: isProduction ? "none" : "lax",
-  path: "/",
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-};
-
 function hashToken(value) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
@@ -53,16 +37,6 @@ async function persistRefreshToken(user, refreshToken) {
   user.refreshTokenHash = hashToken(refreshToken);
   user.refreshTokenExpiry = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   await user.save();
-}
-
-function setAuthCookies(res, accessToken, refreshToken) {
-  res.cookie("accessToken", accessToken, accessCookieOptions);
-  res.cookie("refreshToken", refreshToken, refreshCookieOptions);
-}
-
-function clearAuthCookies(res) {
-  res.clearCookie("accessToken", accessCookieOptions);
-  res.clearCookie("refreshToken", refreshCookieOptions);
 }
 
 async function registerUser(req, res) {
@@ -124,11 +98,12 @@ async function loginUser(req, res) {
 
     const { accessToken, refreshToken } = issueTokens(user);
     await persistRefreshToken(user, refreshToken);
-    setAuthCookies(res, accessToken, refreshToken);
 
     return res.status(200).json({
       success: true,
       message: "Login successful",
+      accessToken,
+      refreshToken,
       user: { _id: user._id, fullname: user.fullname, email: user.email, role: user.role },
     });
   } catch (error) {
@@ -165,11 +140,12 @@ async function verifyUser(req, res) {
 
     const { accessToken, refreshToken } = issueTokens(user);
     await persistRefreshToken(user, refreshToken);
-    setAuthCookies(res, accessToken, refreshToken);
 
     return res.status(200).json({
       success: true,
       message: "Email verified successfully",
+      accessToken,
+      refreshToken,
       user: { _id: user._id, fullname: user.fullname, email: user.email, role: user.role },
     });
   } catch (error) {
@@ -261,7 +237,6 @@ async function resetPassword(req, res) {
     user.refreshTokenHash = null;
     user.refreshTokenExpiry = null;
     await user.save();
-    clearAuthCookies(res);
 
     return res.status(200).json({ success: true, message: "Password reset successfully" });
   } catch (error) {
@@ -271,7 +246,7 @@ async function resetPassword(req, res) {
 
 async function refreshToken(req, res) {
   try {
-    const token = req.cookies?.refreshToken;
+    const token = req.body?.refreshToken;
     if (!token) return res.status(401).json({ success: false, message: "Refresh token missing" });
 
     const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET);
@@ -290,11 +265,12 @@ async function refreshToken(req, res) {
 
     const { accessToken, refreshToken: nextRefreshToken } = issueTokens(user);
     await persistRefreshToken(user, nextRefreshToken);
-    setAuthCookies(res, accessToken, nextRefreshToken);
 
     return res.status(200).json({
       success: true,
       message: "Session refreshed",
+      accessToken,
+      refreshToken: nextRefreshToken,
       user: { _id: user._id, fullname: user.fullname, email: user.email, role: user.role },
     });
   } catch (error) {
@@ -304,7 +280,7 @@ async function refreshToken(req, res) {
 
 async function logoutUser(req, res) {
   try {
-    const refreshToken = req.cookies?.refreshToken;
+    const refreshToken = req.body?.refreshToken;
     if (refreshToken) {
       const decoded = jwt.decode(refreshToken);
       if (decoded?.id) {
@@ -312,7 +288,6 @@ async function logoutUser(req, res) {
       }
     }
 
-    clearAuthCookies(res);
     return res.status(200).json({ success: true, message: "User logged out successfully" });
   } catch (error) {
     return res.status(500).json({ success: false, message: "Server error" });
@@ -331,17 +306,6 @@ async function getCurrentUser(req, res) {
   });
 }
 
-function getCsrfToken(req, res) {
-  const csrfToken = crypto.randomBytes(24).toString("hex");
-  res.cookie("csrfToken", csrfToken, {
-    httpOnly: false, // Changed from true so frontend JS can read it
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "lax",
-    path: "/",
-  });
-  return res.status(200).json({ success: true, csrfToken });
-}
-
 module.exports = {
   registerUser,
   loginUser,
@@ -352,5 +316,4 @@ module.exports = {
   resetPassword,
   refreshToken,
   getCurrentUser,
-  getCsrfToken,
 };

@@ -52,6 +52,10 @@ const VerifyUser = () => {
       });
       
       if (res.data.success) {
+        if (res.data.accessToken && res.data.refreshToken) {
+          localStorage.setItem("accessToken", res.data.accessToken);
+          localStorage.setItem("refreshToken", res.data.refreshToken);
+        }
         setUser(res.data.user || null);
         toast.success("Email verified successfully!");
         navigate("/");
