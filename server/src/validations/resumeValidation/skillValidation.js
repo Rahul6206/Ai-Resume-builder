@@ -1,6 +1,6 @@
 const { z } = require("zod");
 
-const skillSchema =  z.string().min(2, "Skill name must be at least 2 characters");
+const skillSchema =  z.string().min(2, "technicalSkills must me required least 2 characters");
 
 
 module.exports = { skillSchema };

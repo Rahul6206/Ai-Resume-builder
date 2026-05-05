@@ -5,76 +5,29 @@ const mongoose = require("mongoose");
 
 async function createResume(req, res) {
   try {
-    // Convert ObjectId → string for Zod validation
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
     const dataToValidate = {
       ...req.body,
-      user: req.user?._id?.toString(),
+      user: req.user._id.toString(),
     };
-   
-    // Validate incoming data
+
     const result = resumeSchema.safeParse(dataToValidate);
-    
-
     if (!result.success) {
-      console.error("Validation Error:", result.error); 
       return res.status(400).json({
         success: false,
-        message: "Validation error",
-        errors:
-          result.error?.errors?.map((err) => ({
-            field: err.path.join("."),
-            message: err.message,
-          })) || [],
+        message: result.error._zod.def.at(0),
+       
       });
     }
 
-    //  Destructure validated data
-    const {
-      user,
-      fullname,
-      email,
-      phone,
-      linkedin,
-      github,
-      portfolio,
-      profileSummary,
-      education,
-      technicalSkills,
-      workExperience,
-      projects,
-      certifications,
-      languages,
-      interests,
-    } = result.data;
+    const newResume = await Resume.create(result.data);
 
-    // Ensure user is valid before saving
-    if (!mongoose.Types.ObjectId.isValid(user)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid user ID",
-      });
-    }
-
-    // Create Resume in MongoDB
-    const newResume = await Resume.create({
-      user,
-      fullname,
-      email,
-      phone,
-      linkedin,
-      github,
-      portfolio,
-      profileSummary,
-      education,
-      technicalSkills,
-      workExperience,
-      projects,
-      certifications,
-      languages,
-      interests,
-    });
-
-    // Success response
     return res.status(201).json({
       success: true,
       message: "Resume created successfully",
@@ -154,40 +107,47 @@ async function updateResume(req, res) {
     const { id } = req.params;
 
     const result = resumeSchema.safeParse(req.body);
-
+    
     if (!result.success) {
+      
       return res.status(400).json({
         success: false,
-        message: "Validation error",
-        errors: result.error.errors.map((err) => ({
-          field: err.path.join("."),
-          message: err.message,
-        })),
+        message: result.error._zod.def.at(0),
+        
       });
     }
 
-    const updatedResume = await Resume.findByIdAndUpdate(id, result.data, {
-      new: true,
-      runValidators: true,
-    });
+  
+    const existingResume = await Resume.findById(id);
 
-    if (!updatedResume) {
+    if (!existingResume) {
       return res.status(404).json({
         success: false,
         message: "Resume not found",
       });
     }
 
-    if (updatedResume.user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ success: false, message: "Access denied , You are not the owner of this resume" });
+    
+    if (existingResume.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied, not your resume",
+      });
     }
 
+    
+    const updatedResume = await Resume.findByIdAndUpdate(
+      id,
+      result.data,
+      { new: true, runValidators: true }
+    );
 
     return res.status(200).json({
       success: true,
       message: "Resume updated successfully",
       resume: updatedResume,
     });
+
   } catch (error) {
     console.error("Update Resume Error:", error);
     return res.status(500).json({

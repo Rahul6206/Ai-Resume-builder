@@ -103,7 +103,8 @@ const CreateResume = () => {
       navigate(`/resume-preview/${response.data.resume._id}`);
         
       } catch (error) {
-        toast.error("An error occurred while saving the resume. Please try again.");
+        
+        toast.error(error?.response?.data?.message?.message);
         
       }
       
